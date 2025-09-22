@@ -22,7 +22,7 @@
         }
 
         .hero-section {
-            background-color: #3187e9;
+            background-color: #00e0bb;
             color: white;
             padding: 50px 0;
             text-align: center;
