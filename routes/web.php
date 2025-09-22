@@ -1,7 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/ganteng', function () {
-    return view('welcome');
+Route::get('/', function () {
+    return view ('welcome');
+})->name('mahasiswa.show');
+
+Route::get('/pcr', function () {
+    return 'Selamat Datang di Website Kampus PCR!';
+});
+
+Route::get('/mahasiswa', function () {
+    return 'Halo Mahasiswa';
+});
+
+Route::get('/nama/{param1}', function ($param1) {
+    return 'Nama saya: '.$param1;
+});
+
+Route::get('/home', [HomeController::class,'index']); {
+};
+
+Route::get('/about', function () {
+    return view('halaman-about');
 });
