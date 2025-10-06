@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'fontgacor';
+    src: url('assets/fonts/fontgacor.ttf');
+}
+
+.font-custom{
+    font-family: 'fontgacor';
+}
