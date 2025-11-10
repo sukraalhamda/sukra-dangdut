@@ -50,8 +50,7 @@
         content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120"
-        href="{{ asset('assets-admin/img/favicon/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('assets-admin/img/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32"
         href="{{ asset('assets-admin/img/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16"
@@ -63,7 +62,7 @@
 
     <!-- Start CSS -->
     <!-- Sweet Alert -->
-    @include('Admin.layout.Admin.css')
+    @include('admin.layout.admin.css')
     <!-- End CSS -->
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
