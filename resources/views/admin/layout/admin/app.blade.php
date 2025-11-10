@@ -73,25 +73,25 @@
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
     <!-- Start Navbar -->
-    @include('Admin.layout.Admin.header')
+    @include('admin.layout.admin.header')
     <!-- End Navbar -->
 
 
     <!-- Start Sidebar -->
-    @include('Admin.layout.Admin.sidebar')
+    @include('admin.layout.admin.sidebar')
     <!-- End Sidebar -->
 
 
     <!-- Start -->
     @yield('content')
     <!--Start Footer -->
-    @include('Admin.layout.Admin.footer')
+    @include('admin.layout.admin.footer')
     <!--End Footer -->
 
     <!-- End -->
 
     <!-- Start JS -->
-    @include('Admin.layout.Admin.js')
+    @include('admin.layout.admin.js')
     <!-- End JS -->
 
 </body>
