@@ -24,7 +24,7 @@ class UserController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('Admin.User.index', $pageData);
+        return view('admin.User.index', $pageData);
     }
 
     /**
@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Admin.User.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
-        return view('Admin.User.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
