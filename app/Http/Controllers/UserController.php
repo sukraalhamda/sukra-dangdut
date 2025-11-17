@@ -24,7 +24,7 @@ class UserController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('admin.User.index', $pageData);
+        return view('admin.user.index', $pageData);
     }
 
     /**
