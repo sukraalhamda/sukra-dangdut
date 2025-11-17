@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
-class PelangganController
+class PelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['dataPelanggan'] = Pelanggan::all();
-        return view('admin.pelanggan.index', $data);
+        $filterableColumns         = ['gender'];
+        $searchableColumns         = ['first_name', 'last_name', 'email'];
+        $pageData['dataPelanggan'] = Pelanggan::filter($request, $filterableColumns)->
+            search($request, $searchableColumns)->
+            paginate(10)->WithQueryString();
+        return view('Admin.pelanggan.index', $pageData);
     }
 
     /**
@@ -20,17 +24,18 @@ class PelangganController
      */
     public function create()
     {
-        return view('admin.pelanggan.create');
+        return view('Admin.pelanggan.create');
     }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+
         $data['first_name'] = $request->first_name;
         $data['last_name']  = $request->last_name;
-        $data['birthday']   = $request->birthday;
+        $data['birthday']   = date('Y-m-d', strtotime($request->birthday));
         $data['gender']     = $request->gender;
         $data['email']      = $request->email;
         $data['phone']      = $request->phone;
@@ -38,7 +43,6 @@ class PelangganController
         Pelanggan::create($data);
 
         return redirect()->route('pelanggan.index')->with('success', 'Penambahan Data Berhasil!');
-
     }
 
     /**
@@ -54,7 +58,8 @@ class PelangganController
      */
     public function edit(string $id)
     {
-        //
+        $data['dataPelanggan'] = Pelanggan::findOrFail($id);
+        return view('Admin.pelanggan.edit', $data);
     }
 
     /**
