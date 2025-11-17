@@ -1,4 +1,4 @@
-@extends('Admin.layout.Admin.app')
+@extends('admin.layout.Admin.app')
 
 @section('content')
     <!-- Start -->
