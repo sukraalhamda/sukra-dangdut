@@ -50,8 +50,7 @@
         content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/volt-pro-bootstrap-5-dashboard/volt-pro-preview.jpg">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120"
-        href="{{ asset('assets-admin/img/favicon/apple-touch-icon.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('assets-admin/img/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32"
         href="{{ asset('assets-admin/img/favicon/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16"
@@ -82,9 +81,8 @@
 
     <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
         <a class="navbar-brand me-lg-5" href="{{ asset('assets-admin/index.html') }}">
-            <img class="navbar-brand-dark" src="{{ asset('assets-adminimg/brand/light.svg') }}"
-                alt="Volt logo" /> <img class="navbar-brand-light"
-                src="{{ asset('assets-admin/img/brand/dark.svg') }}" alt="Volt logo" />
+            <img class="navbar-brand-dark" src="{{ asset('assets-adminimg/brand/light.svg') }}" alt="Volt logo" /> <img
+                class="navbar-brand-light" src="{{ asset('assets-admin/img/brand/dark.svg') }}" alt="Volt logo" />
         </a>
         <div class="d-flex align-items-center">
             <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse"
@@ -150,8 +148,8 @@
                 <li class="nav-item">
                     <a href="{{ asset('assets-admin/index.html') }}" class="nav-link d-flex align-items-center">
                         <span class="sidebar-icon">
-                            <img src="{{ asset('assets-admin/img/brand/light.svg') }}" height="20"
-                                width="20" alt="Volt Logo">
+                            <img src="{{ asset('assets-admin/img/brand/light.svg') }}" height="20" width="20"
+                                alt="Volt Logo">
                         </span>
                         <span class="mt-1 ms-1 sidebar-text">Volt Overview</span>
                     </a>
@@ -510,38 +508,92 @@
                     </ul>
                 </div>
             @endif
+
             <div class="col-12 mb-4">
                 <div class="card border-0 shadow components-section">
                     <div class="card-body">
-                        <form action="{{ route('users.update', $user->id) }}" method="POST">
+
+                        <form action="{{ route('users.update', $user->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
+                            {{-- Nama --}}
                             <div class="mb-3">
                                 <label class="form-label">Nama</label>
                                 <input type="text" name="name" value="{{ old('name', $user->name) }}"
                                     class="form-control" required>
                             </div>
 
+                            {{-- Email --}}
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="email" value="{{ old('email', $user->email) }}"
                                     class="form-control" required>
                             </div>
 
+                            {{-- Phone --}}
                             <div class="mb-3">
-                                <label class="form-label">Password (wajib diisi)</label>
-                                <input type="password" name="password" class="form-control" required>
+                                <label class="form-label">Nomor HP</label>
+                                <input type="text" name="phone" value="{{ old('phone', $user->phone) }}"
+                                    class="form-control">
                             </div>
 
+                            {{-- Address --}}
+                            <div class="mb-3">
+                                <label class="form-label">Alamat</label>
+                                <textarea name="address" class="form-control" rows="3">{{ old('address', $user->address) }}</textarea>
+                            </div>
+
+                            {{-- Role --}} <div class="mb-3">
+                                <label class="form-label">Role</label>
+                                <select name="role" class="form-select" required>
+                                    <option value="">Pilih Role</option>
+                                    <option value="SuperAdmin"
+                                        {{ old('role', $user->role) == 'SuperAdmin' ? 'selected' : '' }}>SuperAdmin
+                                    </option>
+                                    <option
+                                        value="Pelanggan"{{ old('role', $user->role) == 'Pelanggan' ? 'selected' : '' }}>
+                                        Pelanggan</option>
+                                    <option value="Mitra"{{ old('role', $user->role) == 'Mitra' ? 'selected' : '' }}>
+                                        Mitra</option>
+                                </select>
+                                <small class="text-muted">Pilih role sesuai dengan jenis user yang akan
+                                    ditambahkan.</small>
+                            </div>
+
+
+                            {{-- Status --}}
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select name="status" class="form-control" required>
+                                    <option value="active"
+                                        {{ old('status', $user->status) == 'active' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="inactive"
+                                        {{ old('status', $user->status) == 'inactive' ? 'selected' : '' }}>Tidak Aktif
+                                    </option>
+                                </select>
+                            </div>
+
+                            {{-- Password --}}
+                            <div class="mb-3">
+                                <label class="form-label">Password (opsional)</label>
+                                <input type="password" name="password" class="form-control">
+                                <small class="text-muted">Kosongkan jika tidak ingin mengubah password.</small>
+                            </div>
+
+                            {{-- Konfirmasi Password --}}
                             <div class="mb-3">
                                 <label class="form-label">Konfirmasi Password</label>
-                                <input type="password" name="password_confirmation" class="form-control" required>
+                                <input type="password" name="password_confirmation" class="form-control">
                             </div>
 
+                            {{-- Foto Profile --}}
                             <button class="btn btn-dark" type="submit">Update</button>
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
+
                         </form>
+
                     </div>
                 </div>
             </div>

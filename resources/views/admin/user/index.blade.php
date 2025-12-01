@@ -265,51 +265,69 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <div class="card">
-                <div class="card-body">
-                    @if ($users->count())
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Dibuat</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td>{{ $loop->iteration + ($users->currentPage() - 1) * $users->perPage() }}
-                                            </td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at->format('Y-m-d') }}</td>
-                                            <td>
-                                                <a href="{{ route('users.edit', $user->id) }}"
-                                                    class="btn btn-sm btn-warning">Edit</a>
+            <div class="container-fluid pt-4 px-4">
 
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                    class="d-inline" onsubmit="return confirm('Hapus user ini?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+    {{-- LIST DATA USER --}}
+    <div class="card border-0 shadow mb-4">
+        <div class="card-body">
 
-                        {{ $users->links() }}
-                    @else
-                        <p class="mb-0">Belum ada user.</p>
-                    @endif
-                </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="mb-0">Data Users</h4>
+                <a href="{{ route('users.create') }}" class="btn btn-dark btn-sm">
+                    + Tambah User
+                </a>
             </div>
+
+            @if ($users->count())
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Dibuat</th>
+                                <th style="width:120px;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $loop->iteration + ($users->currentPage() - 1) * $users->perPage() }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
+                                    <td>{{ $user->created_at->format('Y-m-d') }}</td>
+                                    <td>
+                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">
+                                            Edit
+                                        </a>
+
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                            class="d-inline" onsubmit="return confirm('Hapus user ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-3">
+                    {{ $users->links() }}
+                </div>
+
+            @else
+                <p class="text-center mb-0 text-muted">Belum ada user.</p>
+            @endif
+        </div>
+    </div>
         </div>
 
         <div class="card theme-settings bg-gray-800 theme-settings-expand" id="theme-settings-expand">

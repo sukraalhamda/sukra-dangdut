@@ -527,19 +527,30 @@
                                 <input type="email" name="email" value="{{ old('email') }}"
                                     class="form-control" required>
                             </div>
-
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" required>
-                            </div>
+                                <label class="form-label">Role</label>
+                                <select name="role" class="form-select" required>
+                                    <option value="">Pilih Role</option>
+                                    <option value="SuperAdmin">SuperAdmin</option>
+                                    <option value="Pelanggan">Pelanggan</option>
+                                    <option value="Mitra">Mitra</option>
+                                </select>
+                                <small
+                                    class="text-muted">Pilih role sesuai dengan jenis user yang akan ditambahkan.
 
-                            <div class="mb-3">
-                                <label class="form-label">Konfirmasi Password</label>
-                                <input type="password" name="password_confirmation" class="form-control" required>
-                            </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" name="password" class="form-control" required>
+                                    </div>
 
-                            <button class="btn btn-dark" type="submit">Simpan</button>
-                            <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
+                                    <div class="mb-3">
+                                        <label class="form-label">Konfirmasi Password</label>
+                                        <input type="password" name="password_confirmation" class="form-control"
+                                            required>
+                                    </div>
+
+                                    <button class="btn btn-dark" type="submit">Simpan</button>
+                                    <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
                     </div>
                 </div>

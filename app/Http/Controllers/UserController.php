@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -13,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id','desc')->paginate(10);
+        $users = User::orderBy('id', 'desc')->paginate(10);
         return view('admin.user.index', compact('users'));
     }
 
@@ -34,6 +33,7 @@ class UserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
+            'role'     => 'required|string|max:50',
         ]);
 
         $data['password'] = Hash::make($data['password']);
@@ -71,8 +71,10 @@ class UserController extends Controller
         // P2: password wajib diisi saat edit
         $data = $request->validate([
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,'.$user->id,
+            'email'    => 'required|email|unique:users,email,' . $user->id,
             'password' => 'required|string|min:8|confirmed',
+            'role'     => 'required|string|max:50',
+
         ]);
 
         $data['password'] = Hash::make($data['password']);

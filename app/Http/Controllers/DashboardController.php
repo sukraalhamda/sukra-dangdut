@@ -1,16 +1,21 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-return view('admin.dashboard');
+    public function index()
+    {
+        if (!Auth::check()) {
+            //Redirect ke halaman dashboard
+            return redirect()->route('auth')->withErrors('LOGIN DULU WOI!');
+        }
+        return view('admin.dashboard');
     }
 
     /**
