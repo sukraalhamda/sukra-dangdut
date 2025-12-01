@@ -10,10 +10,26 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+<<<<<<< HEAD
         $users = User::orderBy('id', 'desc')->paginate(10);
         return view('admin.user.index', compact('users'));
+=======
+        $filterableColumns = ['email_verified_at'];
+
+        // Kolom yang boleh dicari
+        $searchableColumns = ['name', 'email'];
+
+        // Ambil data dengan filter + search
+        $pageData['dataUser'] = User::filter($request, $filterableColumns)
+            ->search($request, $searchableColumns)
+            ->orderBy('id', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('admin.user.index', $pageData);
+>>>>>>> e2b649807d51b94e9654559c90e81a0de880573b
     }
 
     /**
